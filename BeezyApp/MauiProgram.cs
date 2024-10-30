@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BeezyApp.Services;
+using BeezyApp.View;
+using BeezyApp.ViewModels;
+using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 
 namespace BeezyApp
@@ -27,18 +30,21 @@ namespace BeezyApp
         }
         public static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
         {
-            
+            builder.Services.AddTransient<AppShell>();
+            builder.Services.AddTransient<LoginView>();
+            builder.Services.AddTransient<RegisterView>();
             return builder;
         }
 
         public static MauiAppBuilder RegisterDataServices(this MauiAppBuilder builder)
         {
-            
+            builder.Services.AddSingleton<BeezyWebAPIProxy>();
             return builder;
         }
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
-            
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
             return builder;
         }
     }
