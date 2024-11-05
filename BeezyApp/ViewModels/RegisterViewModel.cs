@@ -21,12 +21,12 @@ namespace BeezyApp.ViewModels
             PhotoURL = proxy.GetDefaultProfilePhotoUrl();
             LocalPhotoPath = "";
             IsPassword = true;
-            NameError = "Name is required";
-            PhoneNumberError = "Phone numbre is required";
-            EmailError = "Email is required";
-            PasswordError = "Password must be at least 4 characters long and contain letters and numbers";
-            CityError = "Your city is required";
-
+            NameError = "שדה השם אינו תקין";
+            PhoneNumberError = "שדה הטלפון אינו תקין";
+            EmailError = "שדה האימייל אינו תקין";
+            PasswordError = "הסיסמה חייבת להיות באורך 4 תווים לפחות ולהכיל אותיות ומספרים";
+            CityError = "שדה העיר אינו תקין";
+            AddressError = "שדה הכתובת אינו תקין";
         }
 
         //Defiine properties for each field in the registration form including error messages and validation logic
@@ -303,6 +303,99 @@ namespace BeezyApp.ViewModels
             this.ShowCityError = string.IsNullOrEmpty(City);
         }
         #endregion
+
+        #region Address
+        private bool showAddressError;
+
+        public bool ShowAddressError
+        {
+            get => showAddressError;
+            set
+            {
+                showAddressError = value;
+                OnPropertyChanged("ShowCityError");
+            }
+        }
+
+        private string address;
+
+        public string Address
+        {
+            get => address;
+            set
+            {
+                address = value;
+                ValidateAddress();
+                OnPropertyChanged("Address");
+            }
+        }
+
+        private string addressError;
+
+        public string AddressError
+        {
+            get => addressError;
+            set
+            {
+                addressError = value;
+                OnPropertyChanged("AddressError");
+            }
+        }
+
+        private void ValidateAddress()
+        {
+            this.ShowAddressError = string.IsNullOrEmpty(Address);
+        }
+        #endregion
+
+        #region Beekeeper Info
+        private bool isBeekeeper;
+        public bool IsBeekeeper
+        {
+            get => isBeekeeper;
+            set
+            {
+                isBeekeeper = value;
+                OnPropertyChanged("IsBeekeeper");
+                ShowBeekeeperFields = value; // Show the additional fields if the user is a beekeeper
+            }
+        }
+
+        private bool showBeekeeperFields;
+        public bool ShowBeekeeperFields
+        {
+            get => showBeekeeperFields;
+            set
+            {
+                showBeekeeperFields = value;
+                OnPropertyChanged("ShowBeekeeperFields");
+            }
+        }
+
+        private int beekeeperRadius;
+        public int BeekeeperRadius
+        {
+            get => beekeeperRadius;
+            set
+            {
+                beekeeperRadius = value;
+                OnPropertyChanged("BeekeeperRadius");
+            }
+        }
+
+        private string beekeeperKind;
+        public string BeekeeperKind
+        {
+            get => beekeeperKind;
+            set
+            {
+                beekeeperKind = value;
+                OnPropertyChanged("BeekeeperKind");
+            }
+        }
+        #endregion
+
+
 
         #region Photo
 
