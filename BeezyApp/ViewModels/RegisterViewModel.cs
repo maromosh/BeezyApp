@@ -395,6 +395,21 @@ namespace BeezyApp.ViewModels
         }
         #endregion
 
+        #region Radius
+        private int radius;
+
+        public int Radius
+        {
+            get => radius;
+            set
+            {
+                Radius = value;
+                OnPropertyChanged("Radius");
+            }
+        }
+
+        #endregion
+
 
 
         #region Photo
