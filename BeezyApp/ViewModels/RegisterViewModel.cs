@@ -27,6 +27,8 @@ namespace BeezyApp.ViewModels
             PasswordError = "הסיסמה חייבת להיות באורך 4 תווים לפחות ולהכיל אותיות ומספרים";
             CityError = "שדה העיר אינו תקין";
             AddressError = "שדה הכתובת אינו תקין";
+            kinds = (new BeeKeeperKinds()).Kinds;
+            BeekeeperKind = Kinds[0];
         }
 
         //Defiine properties for each field in the registration form including error messages and validation logic
@@ -391,6 +393,17 @@ namespace BeezyApp.ViewModels
             {
                 beekeeperKind = value;
                 OnPropertyChanged("BeekeeperKind");
+            }
+        }
+
+        private List<string> kinds;
+        public List<string> Kinds
+        {
+            get => kinds;
+            set
+            {
+                kinds = value;
+                OnPropertyChanged();
             }
         }
         #endregion

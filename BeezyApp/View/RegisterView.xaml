@@ -21,7 +21,7 @@
                     <Image x:Name="theImageBug" Source="{Binding PhotoURL}"  HeightRequest="150"/>
                     <Label Grid.Row="1"
                 Text="לחץ כאן להעלאת תמונה"
-                TextColor="Blue"
+                TextColor="Pink"
                 HorizontalOptions="Center"
                 VerticalOptions="End">
 
@@ -63,7 +63,6 @@
                     <ColumnDefinition Width="40" />
                 </Grid.ColumnDefinitions>
                 <Label Text="טלפון" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
-                <Entry Grid.Column="0" Placeholder="הכנס טלפון" Text="{Binding Password}" IsPassword="{Binding IsPassword}" Style="{StaticResource entryStyle}" />
                 <ImageButton Grid.Column="1" HeightRequest="25" Source="passwordeye.jpg" Command="{Binding ShowPasswordCommand}" />
             </Grid>
             <Entry Placeholder="הכנס מספר טלפון" Text="{Binding PhoneNumber}" Style="{StaticResource entryStyle}" />
@@ -118,8 +117,9 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="Beekeeper Radius" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="רדיוס מהמיקום שלי שאני יכול.ה לבוא לעזור" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
                 </Grid>
+                
                 <Entry Placeholder="Type Beekeeper Radius" Text="{Binding BeekeeperRadius}" Keyboard="Numeric" Style="{StaticResource entryStyle}" />
 
                 <!-- Beekeeper Kind Field (as a dropdown) -->
@@ -128,15 +128,22 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="Beekeeper Kind" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="סוג דבוראי.ת שאתם" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
                 </Grid>
                 <Picker 
-        SelectedItem="{Binding BeekeeperKind}" 
-        ItemsSource="{Binding BeekeeperKindOptions}" 
-        Style="{StaticResource entryStyle}">
-                    <Picker.ItemDisplayBinding>
-                        <Binding Path="." />
-                    </Picker.ItemDisplayBinding>
+        SelectedItem="{Binding BeekeeperKind, Mode=TwoWay}"
+                    ItemsSource="{Binding Kinds}">
+                    <!--<Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>דבוראים מקצועיים</x:String>
+                            <x:String>דבוראים אורגניים / ביודינמיים</x:String>
+                            <x:String>דבוראים חובבים</x:String>
+                            <x:String>דבוראים טיפוליים</x:String>
+                            <x:String>דבוראים מורים / מדריכים</x:String>
+                            <x:String>דבוראים חקלאיים</x:String>
+                            <x:String>דבוראים כימיים / מדעיים</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>-->
                 </Picker>
             </StackLayout>
             
@@ -146,7 +153,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Text="Are you a Beekeeper?" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="האם את.ה דבוראי?" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
                 <Switch IsToggled="{Binding IsBeekeeper}" Grid.Column="1" />
 
             </Grid>
