@@ -12,12 +12,13 @@ namespace BeezyApp.Models
         public BeeKeeperKinds() 
         {
             Kinds = new List<string>();
+            Kinds.Add("דבוראים חובבים");
             Kinds.Add("דבוראים מקצועיים");
-            Kinds.Add("1דבוראים מקצועיים");
-            Kinds.Add("דבוראים מקצועיים2");
-            Kinds.Add("דבוראים מקצועיים3");
-
-
+            Kinds.Add("דבוראים טיפוליים");
+            Kinds.Add("דבוראים אורגניים / ביודינמיים");
+            Kinds.Add("דבוראים מורים / מדריכים");
+            Kinds.Add("דבוראים חקלאיים");
+            Kinds.Add("דבוראים כימיים / מדעיים");
         }
     }
 }

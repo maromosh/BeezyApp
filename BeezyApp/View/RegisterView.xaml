@@ -4,7 +4,9 @@
              x:Class="BeezyApp.View.RegisterView"
              FlowDirection="RightToLeft"
              Title="הרשמה">
-    <Grid>
+
+    <ScrollView Margin="20">
+        <Grid>
 
         <!-- Main Content -->
         <VerticalStackLayout IsEnabled="{Binding NotInServerCall}" Padding="20">
@@ -55,6 +57,7 @@
             </Grid>
             <Entry Placeholder="הכנס אימייל" Text="{Binding Email}" Style="{StaticResource entryStyle}" />
 
+            
             <!-- Password -->
             
             <Grid>
@@ -62,12 +65,26 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="40" />
                 </Grid.ColumnDefinitions>
-                <Label Text="טלפון" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
-                <ImageButton Grid.Column="1" HeightRequest="25" Source="passwordeye.jpg" Command="{Binding ShowPasswordCommand}" />
-            </Grid>
-            <Entry Placeholder="הכנס מספר טלפון" Text="{Binding PhoneNumber}" Style="{StaticResource entryStyle}" />
+                <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                </Grid>
+                <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}" Style="{StaticResource entryStyle}" />
 
-            <!-- City -->
+
+                <!-- Phone -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="טלפון" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                </Grid>
+                <Entry Placeholder="הכנס מספר טלפון" Text="{Binding PhoneNumber}" Style="{StaticResource entryStyle}" />
+
+
+                <!-- City -->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -89,26 +106,7 @@
             </Grid>
             <Entry Placeholder="הכנס כתובת" Text="{Binding Address}" Style="{StaticResource entryStyle}" />
 
-            <!-- Beekeeper Info Section --><!--
-            <StackLayout IsVisible="{Binding ShowBeekeeperFields}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="רדיוס בקילומטרים שיכולים לעזור" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
-                </Grid>
-                <Entry Placeholder="הכנס רדיוס" Text="{Binding BeekeeperRadius}" Keyboard="Numeric" Style="{StaticResource entryStyle}" />
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="סוג דבואים" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
-                </Grid>
-                <Entry Placeholder="הכניסו סוג הדבוראים שאתם" Text="{Binding BeekeeperKind}" Style="{StaticResource entryStyle}" />
-            </StackLayout>-->
+            
 
             <StackLayout IsVisible="{Binding ShowBeekeeperFields}">
                 <!-- Beekeeper Radius Field -->
@@ -120,7 +118,7 @@
                     <Label Text="רדיוס מהמיקום שלי שאני יכול.ה לבוא לעזור" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
                 </Grid>
                 
-                <Entry Placeholder="Type Beekeeper Radius" Text="{Binding BeekeeperRadius}" Keyboard="Numeric" Style="{StaticResource entryStyle}" />
+                <Entry Placeholder="הכנס מרחק הרדיוס" Text="{Binding BeekeeperRadius}" Keyboard="Numeric" Style="{StaticResource entryStyle}" />
 
                 <!-- Beekeeper Kind Field (as a dropdown) -->
                 <Grid>
@@ -131,19 +129,9 @@
                     <Label Text="סוג דבוראי.ת שאתם" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
                 </Grid>
                 <Picker 
-        SelectedItem="{Binding BeekeeperKind, Mode=TwoWay}"
+                    SelectedItem="{Binding BeekeeperKind, Mode=TwoWay}"
                     ItemsSource="{Binding Kinds}">
-                    <!--<Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>דבוראים מקצועיים</x:String>
-                            <x:String>דבוראים אורגניים / ביודינמיים</x:String>
-                            <x:String>דבוראים חובבים</x:String>
-                            <x:String>דבוראים טיפוליים</x:String>
-                            <x:String>דבוראים מורים / מדריכים</x:String>
-                            <x:String>דבוראים חקלאיים</x:String>
-                            <x:String>דבוראים כימיים / מדעיים</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>-->
+                    
                 </Picker>
             </StackLayout>
             
@@ -158,7 +146,25 @@
 
             </Grid>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="הרשמה" Command="{Binding RegisterCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="1" Style="{StaticResource buttonStyle}" />
+                
+                <Button Text="ביטול" Command="{Binding CancelCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="0" Style="{StaticResource buttonStyle}"/>
+            </Grid>
+
         </VerticalStackLayout>
+        
+        
+        <ActivityIndicator IsRunning="{Binding InServerCall}" 
+                   Color="Red" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
+
     </Grid>
+     </ScrollView>
 </ContentPage>
         
