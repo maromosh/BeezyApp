@@ -41,7 +41,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Text="שם מלא" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="שם מלא" Grid.Column="0"/>
                 <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
             </Grid>
             <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" Style="{StaticResource entryStyle}" />
@@ -52,7 +52,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Text="אימייל" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="אימייל" Grid.Column="0"/>
                 <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
             </Grid>
             <Entry Placeholder="הכנס אימייל" Text="{Binding Email}" Style="{StaticResource entryStyle}" />
@@ -63,9 +63,9 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="סיסמה" Grid.Column="0"/>
                     <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
                 </Grid>
                 <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}" Style="{StaticResource entryStyle}" />
@@ -76,9 +76,9 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="טלפון" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="טלפון" Grid.Column="0"  />
                     <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
                 </Grid>
                 <Entry Placeholder="הכנס מספר טלפון" Text="{Binding PhoneNumber}" Style="{StaticResource entryStyle}" />
@@ -90,7 +90,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Text="עיר מגורים" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="עיר מגורים" Grid.Column="0" />
                 <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
             </Grid>
             <Entry Placeholder="הכנס עיר מגורים" Text="{Binding City}" Style="{StaticResource entryStyle}" />
@@ -101,7 +101,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Text="כתובת" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="כתובת" Grid.Column="0"  />
                 <Label Text="{Binding AddressError}" IsVisible="{Binding ShowAddressError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
             </Grid>
             <Entry Placeholder="הכנס כתובת" Text="{Binding Address}" Style="{StaticResource entryStyle}" />
@@ -115,7 +115,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="רדיוס מהמיקום שלי שאני יכול.ה לבוא לעזור" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="רדיוס מהמיקום שלי שאני יכול.ה לבוא לעזור" Grid.Column="0"/>
                 </Grid>
                 
                 <Entry Placeholder="הכנס מרחק הרדיוס" Text="{Binding BeekeeperRadius}" Keyboard="Numeric" Style="{StaticResource entryStyle}" />
@@ -126,7 +126,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="סוג דבוראי.ת שאתם" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                    <Label Text="סוג דבוראי.ת שאתם" Grid.Column="0"/>
                 </Grid>
                 <Picker 
                     SelectedItem="{Binding BeekeeperKind, Mode=TwoWay}"
@@ -141,7 +141,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Text="האם את.ה דבוראי?" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                <Label Text="האם את.ה דבוראי?" Grid.Column="0" />
                 <Switch IsToggled="{Binding IsBeekeeper}" Grid.Column="1" />
 
             </Grid>

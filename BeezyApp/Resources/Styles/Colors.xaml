@@ -13,6 +13,9 @@
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
     <Color x:Key="Pink">#F0A8D0</Color>
+    <Color x:Key="ErrorPink">#FF8C9E</Color>
+    <Color x:Key="Yellow">#FFDA76</Color>
+    
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

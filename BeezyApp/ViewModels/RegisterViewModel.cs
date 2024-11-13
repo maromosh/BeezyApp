@@ -195,7 +195,7 @@ namespace BeezyApp.ViewModels
                 //check if email is in the correct format using regular expression
                 if (!System.Text.RegularExpressions.Regex.IsMatch(Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
                 {
-                    EmailError = "Email is not valid";
+                    EmailError = "האימייל אינו תקין";
                     ShowEmailError = true;
                 }
                 else
@@ -206,7 +206,7 @@ namespace BeezyApp.ViewModels
             }
             else
             {
-                EmailError = "Email is required";
+                EmailError = "שדה האימייל נדרש";
             }
         }
         #endregion
@@ -252,14 +252,15 @@ namespace BeezyApp.ViewModels
 
         private void ValidatePhoneNumber()
         {
-            if (string.IsNullOrEmpty(phoneNumber) ||
-                phoneNumber.Length == 10)
+            if (string.IsNullOrEmpty(PhoneNumber) ||
+                PhoneNumber.Length == 10)
             {
                 this.ShowPasswordError = true;
             }
             else
                 this.ShowPhoneNumberError = false;
         }
+
         #endregion
 
         #region City
@@ -422,7 +423,6 @@ namespace BeezyApp.ViewModels
         }
 
         #endregion
-
 
 
         #region Photo
