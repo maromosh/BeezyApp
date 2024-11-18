@@ -255,7 +255,7 @@ namespace BeezyApp.ViewModels
             if (string.IsNullOrEmpty(PhoneNumber) ||
                 PhoneNumber.Length == 10)
             {
-                this.ShowPasswordError = true;
+                this.ShowPhoneNumberError = true;
             }
             else
                 this.ShowPhoneNumberError = false;
@@ -494,19 +494,23 @@ namespace BeezyApp.ViewModels
         public async void OnRegister()
         {
             ValidateName();
+            ValidatePassword();
             ValidatePhoneNumber();
             ValidateEmail();
-            ValidatePassword();
+            ValidateCity();
+            ValidateAddress();
 
-            if (!ShowNameError && !ShowPhoneNumberError && !ShowEmailError && !ShowPasswordError)
+            if (!ShowNameError && !ShowPasswordError && !ShowPhoneNumberError && !ShowEmailError && !ShowCityError && !ShowAddressError)
             {
                 //Create a new AppUser object with the data from the registration form
                 var newUser = new User
                 {
                     UserName = Name,
+                    UserPassword = Password,
                     UserPhone = PhoneNumber,
                     UserEmail = Email,
-                    UserPassword = Password,
+                    UserCity = City,
+                    UserAddress = Address,
                     IsManeger = false
                 };
 

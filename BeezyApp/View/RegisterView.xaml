@@ -151,10 +151,12 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Text="הרשמה" Command="{Binding RegisterCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="1" Style="{StaticResource buttonStyle}" />
                 
-                <Button Text="ביטול" Command="{Binding CancelCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="0" Style="{StaticResource buttonStyle}"/>
-            </Grid>
+                
+                <Button Text="ביטול" Command="{Binding CancelCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="1"/>
+
+                    <Button Text="הרשמה" Command="{Binding RegisterCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="0"  />
+                </Grid>
 
         </VerticalStackLayout>
         
