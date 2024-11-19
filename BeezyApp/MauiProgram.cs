@@ -33,6 +33,12 @@ namespace BeezyApp
             builder.Services.AddTransient<AppShell>();
             builder.Services.AddTransient<LoginView>();
             builder.Services.AddTransient<RegisterView>();
+            builder.Services.AddTransient<HomePageView>();
+            builder.Services.AddTransient<ReportsView>();
+            builder.Services.AddTransient<UserView>();
+            builder.Services.AddTransient<WorkShopView>();
+            builder.Services.AddTransient<ChatView>();
+            builder.Services.AddTransient<ManagerView>();
             return builder;
         }
 
@@ -45,6 +51,12 @@ namespace BeezyApp
         {
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<HomePageVeiwModle>();
+            builder.Services.AddTransient<ReportsVeiwModle>();
+            builder.Services.AddTransient<UserViewModle>();
+            builder.Services.AddTransient<WorkShopVeiwModle>();
+            builder.Services.AddTransient<ChatVeiwModle>();
+            builder.Services.AddTransient<ManagerVeiwModle>();
             return builder;
         }
     }
