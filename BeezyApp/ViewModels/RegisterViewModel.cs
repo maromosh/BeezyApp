@@ -1,5 +1,6 @@
 ﻿using BeezyApp.Models;
 using BeezyApp.Services;
+using Microsoft.Maui.Controls.Compatibility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace BeezyApp.ViewModels
             CancelCommand = new Command(OnCancel);
             ShowPasswordCommand = new Command(OnShowPassword);
             UploadPhotoCommand = new Command(OnUploadPhoto);
+            UploadTakePhotoCommand = new Command(OnUploadTakePhoto);
             PhotoURL = proxy.GetDefaultProfilePhotoUrl();
             LocalPhotoPath = "";
             IsPassword = true;
@@ -253,7 +255,7 @@ namespace BeezyApp.ViewModels
         private void ValidatePhoneNumber()
         {
             if (string.IsNullOrEmpty(PhoneNumber) ||
-                PhoneNumber.Length == 10)
+                PhoneNumber.Length != 10)
             {
                 this.ShowPhoneNumberError = true;
             }
@@ -316,7 +318,7 @@ namespace BeezyApp.ViewModels
             set
             {
                 showAddressError = value;
-                OnPropertyChanged("ShowCityError");
+                OnPropertyChanged("ShowAddressError");
             }
         }
 
@@ -454,6 +456,30 @@ namespace BeezyApp.ViewModels
         public Command UploadPhotoCommand { get; }
         //This method open the file picker to select a photo
         private async void OnUploadPhoto()
+        {
+            try
+            {
+                var result = await MediaPicker.Default.PickPhotoAsync(new MediaPickerOptions
+                {
+                    Title = "בחר תמונה מהגלריה",
+                });
+
+                if (result != null)
+                {
+                    // The user picked a file
+                    this.LocalPhotoPath = result.FullPath;
+                    this.PhotoURL = result.FullPath;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+        public Command UploadTakePhotoCommand { get; }
+        //This method open the file picker to select a photo
+        private async void OnUploadTakePhoto()
         {
             try
             {

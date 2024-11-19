@@ -10,32 +10,42 @@
 
         <!-- Main Content -->
         <VerticalStackLayout IsEnabled="{Binding NotInServerCall}" Padding="20">
-            <!-- Photo -->
-            <Frame BorderColor="Black" Padding="5" Margin="10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image x:Name="theImageBug" Source="{Binding PhotoURL}"  HeightRequest="150"/>
-                    <Label Grid.Row="1"
-                Text="לחץ כאן להעלאת תמונה"
-                TextColor="Pink"
-                HorizontalOptions="Center"
-                VerticalOptions="End">
-
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding UploadPhotoCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
+                <!-- Photo -->
+                <Frame BorderColor="Black" Padding="5" Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="theImageBug" Source="{Binding PhotoURL}"  HeightRequest="150"/>
+                        <Label Grid.Row="0"
+                            Text="לחצו פה לקחת תמונה!"
+                            TextColor="DeepPink"
+                            HorizontalOptions="Center"
+                            VerticalOptions="End">
 
 
-                </Grid>
-            </Frame>
-            <!-- Name -->
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UploadTakePhotoCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label Grid.Row="1"
+                            Text="לחץ פה להעלות תמונה!"
+                            TextColor="DeepPink"
+                            HorizontalOptions="Center"
+                            VerticalOptions="End">      
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UploadPhotoCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Frame>
+                <!-- Name -->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

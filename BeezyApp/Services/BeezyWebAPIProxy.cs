@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 //using BeezyApp.Models;
 
+
 namespace BeezyApp.Services
 {
     public class BeezyWebAPIProxy
@@ -28,24 +29,63 @@ namespace BeezyApp.Services
 
         #region with tunnel
         //Define the serevr IP address! (should be realIP address if you are using a device that is not running on the same machine as the server)
-        private static string serverIP = "cxb1bdr5-5010.euw.devtunnels.ms";
+        private static string serverIP = "v3kd1dd2-5010.euw.devtunnels.ms";
         private HttpClient client;
         private string baseUrl;
-        public static string BaseAddress = "https://cxb1bdr5-5010.euw.devtunnels.ms/api/";
-        private static string ImageBaseAddress = "https://cxb1bdr5-5010.euw.devtunnels.ms/";
+        public static string BaseAddress = "https://v3kd1dd2-5010.euw.devtunnels.ms/api/";
+        private static string ImageBaseAddress = "https://v3kd1dd2-5010.euw.devtunnels.ms/";
         #endregion
+    //    private readonly HttpClient _httpClient;
 
-        public BeezyWebAPIProxy()
-        {
-            //Set client handler to support cookies!!
+    //    public BeezyWebAPIProxy()
+    //    {
+    //        //Set client handler to support cookies!!
+    //        HttpClientHandler handler = new HttpClientHandler();
+    //        handler.CookieContainer = new System.Net.CookieContainer();
+
+    //        this.client = new HttpClient(handler);
+    //        this.baseUrl = BaseAddress;
+    //       }
+        
+    //}
+
+
+
+
+    private readonly HttpClient _httpClient;
+
+    public BeezyWebAPIProxy()
+    {
+            // Set client handler to support cookies
             HttpClientHandler handler = new HttpClientHandler();
             handler.CookieContainer = new System.Net.CookieContainer();
 
-            this.client = new HttpClient(handler);
-            this.baseUrl = BaseAddress;
-        }
+            // Initialize _httpClient with handler
+            _httpClient = new HttpClient(handler)
+            {
+                BaseAddress = new Uri(baseUrl)
+            };
+    }
 
-        public string GetImagesBaseAddress()
+    // Method to register a beekeeper
+    public async Task<BeeKeeper> RegisterBeekeeper(BeeKeeper beekeeperDto)
+    {
+        // Make a POST request to the API with the beekeeper data
+        var response = await _httpClient.PostAsJsonAsync("api/register/beekeeper", beekeeperDto);
+
+        if (response.IsSuccessStatusCode)
+        {
+            // If successful, deserialize and return the BeeKeeper object
+            return await response.Content.ReadAsAsync<BeeKeeper>();
+        }
+        else
+        {
+            // If the registration failed, throw an exception with the error message
+            throw new Exception("Registration failed: " + await response.Content.ReadAsStringAsync());
+        }
+    }
+
+    public string GetImagesBaseAddress()
         {
             return BeezyWebAPIProxy.ImageBaseAddress;
         }
@@ -160,5 +200,7 @@ namespace BeezyApp.Services
                 return null;
             }
         }
+
+
     }
 }
