@@ -3,25 +3,35 @@
     x:Class="BeezyApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BeezyApp"
+    xmlns:local="clr-namespace:BeezyApp.View"
     Shell.FlyoutBehavior="Disabled"
     Title="BeezyApp">
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="tabs">
         <ShellContent
-            Title="HomePage" Icon=""
-            ContentTemplate="{DataTemplate views:HomePageView}"
-            Route="HomePage" />
+            Title="User" Icon="bee.png"
+        ContentTemplate="{DataTemplate local:UserView}"
+            Route="User" />
 
         <ShellContent
-            Title="Profile" Icon=""
-            ContentTemplate="{DataTemplate views:}"
-            Route="Profile" />  
+             Title="Reports" Icon="bee.png"
+             ContentTemplate="{DataTemplate local:ReportsView}"
+             Route="Reports" />
+
+        <ShellContent
+             Title="HomePage" Icon="bee.png"
+             ContentTemplate="{DataTemplate local:HomePageView}"
+             Route="HomePage" />
+
+        <ShellContent
+             Title="WorkShop" Icon="bee.png"
+             ContentTemplate="{DataTemplate local:WorkShopView}"
+             Route="WorkShop" />
 
         <ShellContent IsVisible="{Binding IsManager}"
-            Title="Report" Icon=""
-            ContentTemplate="{DataTemplate views:ManagerReport}"
-            Route="Report" />
+            Title="Manager" Icon="bee.png"
+            ContentTemplate="{DataTemplate local:ManagerView}"
+            Route="Manager" />
 
 
     </FlyoutItem>
