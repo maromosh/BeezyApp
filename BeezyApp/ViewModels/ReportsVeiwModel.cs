@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeezyApp.ViewModels
 {
-    public class UserViewModle
+    public class ReportsVeiwModel
     {
     }
 }

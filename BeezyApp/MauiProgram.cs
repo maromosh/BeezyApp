@@ -52,8 +52,8 @@ namespace BeezyApp
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<HomePageVeiwModle>();
-            builder.Services.AddTransient<ReportsVeiwModle>();
-            builder.Services.AddTransient<UserViewModle>();
+            builder.Services.AddTransient<ReportsVeiwModel>();
+            builder.Services.AddTransient<UserViewModel>();
             builder.Services.AddTransient<WorkShopVeiwModle>();
             builder.Services.AddTransient<ChatVeiwModle>();
             builder.Services.AddTransient<ManagerVeiwModle>();
