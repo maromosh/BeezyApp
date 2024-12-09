@@ -72,7 +72,27 @@ namespace BeezyApp.ViewModels
                 OnPropertyChanged("BeekeeperIsActive");
             }
         }
-        
 
+        public bool IsBeeKeeper
+        {
+            get => (currentUser is BeeKeeper);
+        }
+
+        public Command UpdateActiveCommand
+        {
+            get { return new Command(UpdateActive); }
+        }
+
+        private void UpdateActive()
+        {
+            if (currentUser is BeeKeeper)
+            {
+                BeeKeeper b = (BeeKeeper)currentUser;
+                b.BeekeeperIsActive = !b.BeekeeperIsActive;
+
+                proxy.UpdateUser(b);
+
+            }
+        }
     }
 }
