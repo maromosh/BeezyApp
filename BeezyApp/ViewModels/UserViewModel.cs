@@ -27,8 +27,17 @@ namespace BeezyApp.ViewModels
                 BeeKeeper b = (BeeKeeper)currentUser;
                 BeekeeperIsActive = b.BeekeeperIsActive;
             }
+
+            UpdateActiveCommand = new Command(UpdateActive);
         }
 
+        public string ImageProfileURL
+        {
+            get
+            {
+                return proxy.GetImagesBaseAddress() + currentUser.ProfileImagePath;
+            }
+        }
         private string name;
         public string Name
         {
@@ -80,18 +89,42 @@ namespace BeezyApp.ViewModels
 
         public Command UpdateActiveCommand
         {
-            get { return new Command(UpdateActive); }
+            get; set;
         }
 
-        private void UpdateActive()
+        private async void UpdateActive()
         {
             if (currentUser is BeeKeeper)
             {
+                InServerCall = true;
                 BeeKeeper b = (BeeKeeper)currentUser;
                 b.BeekeeperIsActive = !b.BeekeeperIsActive;
+                await proxy.UpdateUser(b);
+                OnPropertyChanged("ActiveButtonText");
+                InServerCall = false;
 
-                proxy.UpdateUser(b);
+            }
+        }
 
+        //ActiveButtonText
+        public string ActiveButtonText
+        {
+            get 
+            {
+                if (IsBeeKeeper)
+                {
+                    BeeKeeper b = (BeeKeeper)currentUser;
+                    if (b.BeekeeperIsActive)
+                    {
+                        return "שנה ללא פעיל";
+                    }
+                    else
+                    {
+                        return "שנה לפעיל";
+                    }
+                }
+                else
+                    return "";
             }
         }
     }

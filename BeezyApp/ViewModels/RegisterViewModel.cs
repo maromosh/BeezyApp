@@ -376,14 +376,15 @@ namespace BeezyApp.ViewModels
             }
         }
 
-        private int beekeeperRadius;
-        public int BeekeeperRadius
+        private int radius;
+
+        public int Radius
         {
-            get => beekeeperRadius;
+            get => radius;
             set
             {
-                beekeeperRadius = value;
-                OnPropertyChanged("BeekeeperRadius");
+                Radius = value;
+                OnPropertyChanged("Radius");
             }
         }
 
@@ -410,20 +411,7 @@ namespace BeezyApp.ViewModels
         }
         #endregion
 
-        #region Radius
-        private int radius;
-
-        public int Radius
-        {
-            get => radius;
-            set
-            {
-                Radius = value;
-                OnPropertyChanged("Radius");
-            }
-        }
-
-        #endregion
+       
 
 
         #region Photo
@@ -525,50 +513,101 @@ namespace BeezyApp.ViewModels
             ValidateCity();
             ValidateAddress();
 
+            
             if (!ShowNameError && !ShowPasswordError && !ShowPhoneNumberError && !ShowEmailError && !ShowCityError && !ShowAddressError)
             {
-                //Create a new AppUser object with the data from the registration form
-                var newUser = new User
+                if (isBeekeeper)
                 {
-                    UserName = Name,
-                    UserPassword = Password,
-                    UserPhone = PhoneNumber,
-                    UserEmail = Email,
-                    UserCity = City,
-                    UserAddress = Address,
-                    IsManeger = false
-                };
-
-                //Call the Register method on the proxy to register the new user
-                InServerCall = true;
-                newUser = await proxy.Register(newUser);
-                InServerCall = false;
-
-                //If the registration was successful, navigate to the login page
-                if (newUser != null)
-                {
-                    //UPload profile imae if needed
-                    if (!string.IsNullOrEmpty(LocalPhotoPath))
+                    var newBeekeeper = new BeeKeeper
                     {
-                        await proxy.LoginAsync(new LoginInfo { Email = newUser.UserEmail, Password = newUser.UserPassword });
-                        User? updatedUser = await proxy.UploadProfileImage(LocalPhotoPath);
-                        if (updatedUser == null)
-                        {
-                            InServerCall = false;
-                            await Application.Current.MainPage.DisplayAlert("Registration", "User Data Was Saved BUT Profile image upload failed", "ok");
-                        }
-                    }
+                        UserName = Name,
+                        UserPassword = Password,
+                        UserPhone = PhoneNumber,
+                        UserEmail = Email,
+                        UserCity = City,
+                        UserAddress = Address,
+                        IsManeger = false,
+                        BeekeeperRadius = Radius,
+                        BeekeeperKind = BeekeeperKind
+                    };
+                    InServerCall = true;
+                    newBeekeeper = await proxy.RegisterBeekeeper(newBeekeeper);
                     InServerCall = false;
 
-                    ((App)(Application.Current)).MainPage.Navigation.PopAsync();
-                }
-                else
-                {
 
-                    //If the registration failed, display an error message
-                    string errorMsg = "Registration failed. Please try again.";
-                    await Application.Current.MainPage.DisplayAlert("Registration", errorMsg, "ok");
+                    //If the registration was successful, navigate to the login page
+                    if (newBeekeeper != null)
+                    {
+                        //UPload profile imae if needed
+                        if (!string.IsNullOrEmpty(LocalPhotoPath))
+                        {
+                            await proxy.LoginAsync(new LoginInfo { Email = newBeekeeper.UserEmail, Password = newBeekeeper.UserPassword });
+                            BeeKeeper? updatedBeekeeper = await proxy.UploadProfileImage(LocalPhotoPath);
+                            if (updatedBeekeeper == null)
+                            {
+                                InServerCall = false;
+                                await Application.Current.MainPage.DisplayAlert("Registration", "User Data Was Saved BUT Profile image upload failed", "ok");
+                            }
+                        }
+                        InServerCall = false;
+
+                        ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+                    }
+                    else
+                    {
+
+                        //If the registration failed, display an error message
+                        string errorMsg = "Registration failed. Please try again.";
+                        await Application.Current.MainPage.DisplayAlert("Registration", errorMsg, "ok");
+                    }
                 }
+                else 
+                {
+                    //Create a new AppUser object with the data from the registration form
+                    var newUser = new User
+                    {
+                        UserName = Name,
+                        UserPassword = Password,
+                        UserPhone = PhoneNumber,
+                        UserEmail = Email,
+                        UserCity = City,
+                        UserAddress = Address,
+                        IsManeger = false
+                    };
+                    //Call the Register method on the proxy to register the new user
+                    InServerCall = true;
+                    newUser = await proxy.Register(newUser);
+                    InServerCall = false;
+
+
+                    //If the registration was successful, navigate to the login page
+                    if (newUser != null)
+                    {
+                        //UPload profile imae if needed
+                        if (!string.IsNullOrEmpty(LocalPhotoPath))
+                        {
+                            await proxy.LoginAsync(new LoginInfo { Email = newUser.UserEmail, Password = newUser.UserPassword });
+                            User? updatedUser = await proxy.UploadProfileImage(LocalPhotoPath);
+                            if (updatedUser == null)
+                            {
+                                InServerCall = false;
+                                await Application.Current.MainPage.DisplayAlert("Registration", "User Data Was Saved BUT Profile image upload failed", "ok");
+                            }
+                        }
+                        InServerCall = false;
+
+                        ((App)(Application.Current)).MainPage.Navigation.PopAsync();
+                    }
+                    else
+                    {
+
+                        //If the registration failed, display an error message
+                        string errorMsg = "Registration failed. Please try again.";
+                        await Application.Current.MainPage.DisplayAlert("Registration", errorMsg, "ok");
+                    }
+                }
+     
+                
             }
         }
 

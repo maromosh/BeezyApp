@@ -21,6 +21,7 @@ namespace BeezyApp.Models
 
         public bool IsManeger { get; set; }
 
+        public string ProfileImagePath { get; set; } = null!;
         public User() { }
        
     }

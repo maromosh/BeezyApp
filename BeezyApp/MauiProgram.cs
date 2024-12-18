@@ -51,12 +51,12 @@ namespace BeezyApp
         {
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
-            builder.Services.AddTransient<HomePageVeiwModle>();
+            builder.Services.AddTransient<HomePageVeiwModel>();
             builder.Services.AddTransient<ReportsVeiwModel>();
             builder.Services.AddTransient<UserViewModel>();
             builder.Services.AddTransient<WorkShopVeiwModle>();
-            builder.Services.AddTransient<ChatVeiwModle>();
-            builder.Services.AddTransient<ManagerVeiwModle>();
+            builder.Services.AddTransient<ChatVeiwModel>();
+            builder.Services.AddTransient<ManagerVeiwModel>();
             return builder;
         }
     }

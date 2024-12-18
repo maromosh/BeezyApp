@@ -31,6 +31,6 @@
                 <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
             </Label.GestureRecognizers>
         </Label>
-        <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Red"></ActivityIndicator>
+        <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Pink"></ActivityIndicator>
     </VerticalStackLayout>
 </ContentPage>

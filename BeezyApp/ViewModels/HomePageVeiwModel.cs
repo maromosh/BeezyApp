@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeezyApp.ViewModels
 {
-    public class HomePageVeiwModle
+    public class HomePageVeiwModel
     {
     }
 }
