@@ -6,7 +6,7 @@
     
     <VerticalStackLayout>
 
-        <Frame BorderColor="Black" Padding="5" Margin="10" CornerRadius="100" WidthRequest="150" HeightRequest="150">
+        <Frame BorderColor="Pink" Padding="5" Margin="10" CornerRadius="100" WidthRequest="150" HeightRequest="150">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -18,10 +18,43 @@
                 <Image Source="{Binding ImageProfileURL}"  HeightRequest="100"/>
             </Grid>
         </Frame>
+
+        <Frame BorderColor="Black" Padding="5" Margin="10" CornerRadius="50" WidthRequest="350"  HeightRequest="150" >
+            <!-- Name -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="שם מלא" Grid.Column="0"/>
+                
+            </Grid>
+            
+            <!-- Email -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="אימייל" Grid.Column="0"/>
+                </Grid>
+            
+            <!-- Phone -->
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="טלפון" Grid.Column="0"  />
+            </Grid>
+            
+
+        </Frame>
+
         
 
-
-        <Button Text="{Binding ActiveButtonText}" Command="{Binding UpdateActiveCommand}" IsVisible="{Binding IsBeeKeeper}"/>
+        <Button Text="{Binding ActiveButtonText}" Command="{Binding UpdateActiveCommand}" IsVisible="{Binding IsBeeKeeper}" />
         <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Pink"></ActivityIndicator>
     </VerticalStackLayout>
 </ContentPage>

@@ -26,6 +26,7 @@ namespace BeezyApp.ViewModels
             {
                 BeeKeeper b = (BeeKeeper)currentUser;
                 BeekeeperIsActive = b.BeekeeperIsActive;
+                IsBeeKeeper = true;
             }
 
             UpdateActiveCommand = new Command(UpdateActive);
@@ -82,11 +83,19 @@ namespace BeezyApp.ViewModels
             }
         }
 
+        private bool isBeeKeeper;
         public bool IsBeeKeeper
         {
-            get => (currentUser is BeeKeeper);
-        }
+            //get => (currentUser is BeeKeeper);
+            get => isBeeKeeper;
+            set
+            {
+                isBeeKeeper = value;
+                OnPropertyChanged("IsBeeKeeper");
 
+            }
+        }
+        
         public Command UpdateActiveCommand
         {
             get; set;

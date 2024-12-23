@@ -542,7 +542,7 @@ namespace BeezyApp.ViewModels
                         if (!string.IsNullOrEmpty(LocalPhotoPath))
                         {
                             await proxy.LoginAsync(new LoginInfo { Email = newBeekeeper.UserEmail, Password = newBeekeeper.UserPassword });
-                            BeeKeeper? updatedBeekeeper = await proxy.UploadProfileImage(LocalPhotoPath);
+                            BeeKeeper? updatedBeekeeper = await proxy.UploadProfileImageBeekeeper(LocalPhotoPath);
                             if (updatedBeekeeper == null)
                             {
                                 InServerCall = false;
