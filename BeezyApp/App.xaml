@@ -15,6 +15,10 @@
                 <Setter Property="TextColor" Value="DeepPink" />
             </Style>
 
+            <Style x:Key="Title" TargetType="Label">
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+
         </ResourceDictionary>
 
     </Application.Resources>

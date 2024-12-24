@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BeezyApp.View.UserView"
+             FlowDirection="RightToLeft"
              Title="UserView">
     
     <VerticalStackLayout>
 
-        <Frame BorderColor="Pink" Padding="5" Margin="10" CornerRadius="100" WidthRequest="150" HeightRequest="150">
+        <Frame BorderColor="Black" Padding="5" Margin="10" CornerRadius="100" WidthRequest="150" HeightRequest="150">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -19,42 +20,60 @@
             </Grid>
         </Frame>
 
-        <Frame BorderColor="Black" Padding="5" Margin="10" CornerRadius="50" WidthRequest="350"  HeightRequest="150" >
-            <!-- Name -->
-            <Grid>
+        <VerticalStackLayout>
+            <Grid >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+
                 </Grid.ColumnDefinitions>
-                <Label Text="שם מלא" Grid.Column="0"/>
-                
+                <!-- Name -->
+                <Label Text="{Binding Name}" Grid.Row="0" Margin="10" Style="{StaticResource Title}" HorizontalTextAlignment="Center"/>
             </Grid>
-            
+        </VerticalStackLayout>
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!-- Space for email -->
+                <ColumnDefinition Width="Auto" />
+                <!-- Space for the separator -->
+                <ColumnDefinition Width="*" />
+                <!-- Space for phone number -->
+            </Grid.ColumnDefinitions>
+
             <!-- Email -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="אימייל" Grid.Column="0"/>
-                </Grid>
-            
+            <Label Text="{Binding City}" Grid.Row="0" Grid.Column="0" Margin="10" HorizontalOptions="End" />
+
+            <!-- Separator (|) centered -->
+            <Label Text=" | " Grid.Row="0" Grid.Column="1" Margin="10" HorizontalOptions="Center"/>
+
             <!-- Phone -->
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="טלפון" Grid.Column="0"  />
-            </Grid>
-            
-
-        </Frame>
+            <Label Text="{Binding PhoneNumber}" Grid.Row="0" Grid.Column="2" Margin="10" HorizontalOptions="Start" />
+        </Grid>
 
         
 
-        <Button Text="{Binding ActiveButtonText}" Command="{Binding UpdateActiveCommand}" IsVisible="{Binding IsBeeKeeper}" />
-        <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Pink"></ActivityIndicator>
+        <Button Text="{Binding ActiveButtonText}" Command="{Binding UpdateActiveCommand}" IsVisible="{Binding IsBeeKeeper}" WidthRequest="150" />
+
+        <!--<Button Text="ערוך נתונים אישיים"
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Clicked="OnEditProfileClicked"
+            WidthRequest="150"/>-->
+
+        <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Pink"> </ActivityIndicator>
     </VerticalStackLayout>
 </ContentPage>

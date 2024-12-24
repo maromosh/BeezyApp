@@ -1,5 +1,6 @@
 ﻿using BeezyApp.Models;
 using BeezyApp.Services;
+using BeezyApp.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,8 @@ namespace BeezyApp.ViewModels
 
             //איתחול כל התכונות מתוך אובייקט המשתמש שעשה לוג אין
             currentUser = ((App)Application.Current).LoggedInUser;
-            Name = currentUser.UserName;
-            Email = currentUser.UserEmail;
+            Name = currentUser.UserName ;
+            City = currentUser.UserCity;
             PhoneNumber = currentUser.UserPhone;
 
             if (currentUser is BeeKeeper)
@@ -50,14 +51,14 @@ namespace BeezyApp.ViewModels
             }
         }
 
-        private string email;
-        public string Email
+        private string city;
+        public string City
         {
-            get => email;
+            get => city;
             set
             {
-                email = value;
-                OnPropertyChanged("Email");
+                city = value;
+                OnPropertyChanged("City");
             }
         }
 
@@ -136,5 +137,10 @@ namespace BeezyApp.ViewModels
                     return "";
             }
         }
+        //private async void OnEditProfileClicked(object sender, EventArgs e)
+        //{
+        //    // Navigate to EditProfileView
+        //    await Navigation.PushAsync(new EditProfileView());
+        //}
     }
 }
