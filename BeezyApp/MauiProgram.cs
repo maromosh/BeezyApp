@@ -39,6 +39,8 @@ namespace BeezyApp
             builder.Services.AddTransient<WorkShopView>();
             builder.Services.AddTransient<ChatView>();
             builder.Services.AddTransient<ManagerView>();
+            builder.Services.AddTransient<EditProfileView>();
+
             return builder;
         }
 
@@ -57,6 +59,9 @@ namespace BeezyApp
             builder.Services.AddTransient<WorkShopVeiwModle>();
             builder.Services.AddTransient<ChatVeiwModel>();
             builder.Services.AddTransient<ManagerVeiwModel>();
+            builder.Services.AddTransient<AppShellViewModel>();
+            builder.Services.AddTransient<EditProfileViewModel>();
+
             return builder;
         }
     }

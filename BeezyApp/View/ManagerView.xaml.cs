@@ -1,9 +1,12 @@
+using BeezyApp.ViewModels;
+
 namespace BeezyApp.View;
 
 public partial class ManagerView : ContentPage
 {
-	public ManagerView()
+	public ManagerView(ManagerVeiwModel vm)
 	{
-		InitializeComponent();
+        BindingContext = vm;
+        InitializeComponent();
 	}
 }

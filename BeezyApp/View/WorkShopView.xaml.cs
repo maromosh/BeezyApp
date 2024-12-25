@@ -1,9 +1,12 @@
+using BeezyApp.ViewModels;
+
 namespace BeezyApp.View;
 
 public partial class WorkShopView : ContentPage
 {
-	public WorkShopView()
+	public WorkShopView(WorkShopVeiwModle vm)
 	{
-		InitializeComponent();
+        BindingContext = vm;
+        InitializeComponent();
 	}
 }

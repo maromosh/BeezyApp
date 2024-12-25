@@ -1,6 +1,7 @@
 ﻿using BeezyApp.Models;
 using BeezyApp.Services;
 using BeezyApp.View;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace BeezyApp.ViewModels
             }
 
             UpdateActiveCommand = new Command(UpdateActive);
+            GoToEditPage = new Command(OnEdit);
         }
 
         public string ImageProfileURL
@@ -142,5 +144,10 @@ namespace BeezyApp.ViewModels
         //    // Navigate to EditProfileView
         //    await Navigation.PushAsync(new EditProfileView());
         //}
+        public Command GoToEditPage { get; set; }
+        private async void OnEdit()
+        {
+            await Shell.Current.GoToAsync("EditProfileView");
+        }
     }
 }

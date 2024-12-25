@@ -1,9 +1,12 @@
+using BeezyApp.ViewModels;
+
 namespace BeezyApp.View;
 
 public partial class EditProfileView : ContentPage
 {
-	public EditProfileView()
+	public EditProfileView(EditProfileViewModel vm)
 	{
-		InitializeComponent();
+        BindingContext = vm;
+        InitializeComponent();
 	}
 }

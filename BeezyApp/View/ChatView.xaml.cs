@@ -1,9 +1,12 @@
+using BeezyApp.ViewModels;
+
 namespace BeezyApp.View;
 
 public partial class ChatView : ContentPage
 {
-	public ChatView()
+	public ChatView(ChatVeiwModel vm)
 	{
-		InitializeComponent();
+        BindingContext = vm;
+        InitializeComponent();
 	}
 }

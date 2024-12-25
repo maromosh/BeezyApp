@@ -64,15 +64,10 @@
 
         
 
-        <Button Text="{Binding ActiveButtonText}" Command="{Binding UpdateActiveCommand}" IsVisible="{Binding IsBeeKeeper}" WidthRequest="150" />
+        <Button Text="{Binding ActiveButtonText}" Command="{Binding UpdateActiveCommand}" IsVisible="{Binding IsBeeKeeper}" WidthRequest="170" Margin="6"/>
 
-        <!--<Button Text="ערוך נתונים אישיים"
-            Grid.Row="1"
-            Grid.ColumnSpan="3"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Clicked="OnEditProfileClicked"
-            WidthRequest="150"/>-->
+
+        <Button  Text="ערוך נתונים אישיים" Grid.Column="1" Command="{Binding GoToEditPage}" WidthRequest="170" Margin="6"/>
 
         <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Pink"> </ActivityIndicator>
     </VerticalStackLayout>

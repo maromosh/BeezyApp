@@ -19,6 +19,12 @@
                 <Setter Property="FontSize" Value="18"/>
             </Style>
 
+            <Style x:Key="InSideOutButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="BorderColor" Value="Pink"/>
+                <Setter Property="TextColor" Value="Pink"/>
+            </Style>
+
         </ResourceDictionary>
 
     </Application.Resources>

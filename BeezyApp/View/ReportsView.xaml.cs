@@ -1,9 +1,12 @@
+using BeezyApp.ViewModels;
+
 namespace BeezyApp.View;
 
 public partial class ReportsView : ContentPage
 {
-	public ReportsView()
+	public ReportsView(ReportsVeiwModel vm)
 	{
-		InitializeComponent();
+        BindingContext = vm;
+        InitializeComponent();
 	}
 }
