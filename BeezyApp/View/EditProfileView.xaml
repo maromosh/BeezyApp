@@ -2,11 +2,180 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BeezyApp.View.EditProfileView"
+             FlowDirection="RightToLeft"
              Title="EditProfileView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+
+        <VerticalStackLayout>
+            <Grid>
+
+
+                <!-- Main Content -->
+                <VerticalStackLayout IsEnabled="{Binding NotInServerCall}" Padding="20">
+                    <!-- Photo -->
+                    <Frame BorderColor="Black" Padding="5" Margin="10" CornerRadius="50">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="theImageBug" Source="{Binding PhotoURL}"  HeightRequest="150" IsEnabled="{Binding Change}"/>
+                            <Label Grid.Row="1"
+                                IsEnabled="{Binding Change}"
+                                Text="לחצו פה לקחת תמונה!"
+                                TextColor="DeepPink"
+                                HorizontalOptions="Center"
+                                VerticalOptions="End">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label Grid.Row="2"
+                                IsEnabled="{Binding Change}"
+                                Text="לחץ פה להעלות תמונה!"
+                                TextColor="DeepPink"
+                                HorizontalOptions="Center"
+                                VerticalOptions="End">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding UploadTakePhotoCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Frame>
+
+                    <Button Text="Edit" Command="{Binding EditCommand}" Style="{StaticResource buttonStyle}"/>
+                    <!-- Name -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="שם מלא" Grid.Column="0"/>
+                        <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                    </Grid>
+                    <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" Style="{StaticResource entryStyle}" IsEnabled="{Binding Change}"/>
+
+
+                    <!-- Email -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="אימייל" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                    </Grid>
+
+                    <Entry Placeholder="הכניסו אימייל" Text="{Binding Email}" Style="{StaticResource entryStyle}" IsEnabled="{Binding Change}"/>
+
+
+                    <!-- Password -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="סיסמה" Grid.Column="0" />
+                        <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <Entry Grid.Column="0" Placeholder="הכניסו סיסמה" Text="{Binding Password}" IsPassword="{Binding IsPassword}" Style="{StaticResource entryStyle}" IsEnabled="{Binding Change}" />
+                        <ImageButton Grid.Column="1" HeightRequest="25" Source="passwordcloseeye.jpg" Command="{Binding ShowPasswordCommand}" />
+                    </Grid>
+
+
+                    <!--Phone Number -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="מספר טלפון" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                        <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                    </Grid>
+                    <Entry Placeholder="הכניסו מספר טלפון" Keyboard="Telephone" Text="{Binding PhoneNumber}" Style="{StaticResource entryStyle}" IsEnabled="{Binding Change}" />
+
+                    <!-- City -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="עיר מגורים" Grid.Column="0" />
+                        <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                    </Grid>
+                    <Entry Placeholder="הכנס עיר מגורים" Text="{Binding City}" Style="{StaticResource entryStyle}" IsEnabled="{Binding Change}"/>
+
+                    <!--Address -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Address" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
+                        <Label Text="{Binding AddressError}" IsVisible="{Binding ShowAddressError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+                    </Grid>
+                    <Entry Placeholder="Type Adress" Text="{Binding Address}" Style="{StaticResource entryStyle}" IsEnabled="{Binding Change}"/>
+
+
+                    <StackLayout IsVisible="{Binding isb}">
+                        <!-- Beekeeper Radius Field -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="רדיוס מהמיקום שלי שאני יכול.ה לבוא לעזור" Grid.Column="0"/>
+                        </Grid>
+
+                        <Entry Placeholder="הכנס מרחק הרדיוס" Text="{Binding BeekeeperRadius}" Keyboard="Numeric" Style="{StaticResource entryStyle}" />
+
+                        <!-- Beekeeper Kind Field (as a dropdown) -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="סוג דבוראי.ת שאתם" Grid.Column="0"/>
+                        </Grid>
+                        <Picker 
+        SelectedItem="{Binding BeekeeperKind, Mode=TwoWay}"
+        ItemsSource="{Binding Kinds}">
+
+                        </Picker>
+                    </StackLayout>
+
+
+                    <!-- Save Button -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Text="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding NotInServerCall}" Grid.Column="1" Style="{StaticResource buttonStyle}" IsVisible="{Binding Change}" />
+
+                    </Grid>
+                </VerticalStackLayout>
+                <!-- Centered ActivityIndicator -->
+                <ActivityIndicator IsRunning="{Binding InServerCall}" 
+                   Color="Red" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
+            </Grid>
+
+
+        </VerticalStackLayout>
+
+    </ScrollView>
 </ContentPage>

@@ -24,11 +24,6 @@ namespace BeezyApp.ViewModels
             this.proxy = proxy;
             EditCommand = new Command(OnEdit);
 
-            //CancelCommand = new Command(OnCancel);
-            ShowPasswordCommand = new Command(OnShowPassword);
-            UploadPhotoCommand = new Command(OnUploadPhoto);
-            UploadTakePhotoCommand = new Command(OnUploadTakePhoto);
-            PhotoURL = proxy.GetDefaultProfilePhotoUrl();
 
             Name = currentUser.UserName;
             Password = currentUser.UserPassword;
@@ -38,6 +33,19 @@ namespace BeezyApp.ViewModels
             Address = currentUser.UserAddress;
 
             PhotoURL = proxy.GetImagesBaseAddress() + currentUser.ProfileImagePath;
+
+            if (currentUser is BeeKeeper)
+            {
+                BeeKeeper b = (BeeKeeper)currentUser;
+                IsBeekeeper = true;
+            }
+
+
+            //CancelCommand = new Command(OnCancel);
+            ShowPasswordCommand = new Command(OnShowPassword);
+            UploadPhotoCommand = new Command(OnUploadPhoto);
+            UploadTakePhotoCommand = new Command(OnUploadTakePhoto);
+            PhotoURL = proxy.GetDefaultProfilePhotoUrl();
 
             SaveCommand = new Command(OnSave);
 
@@ -54,7 +62,7 @@ namespace BeezyApp.ViewModels
             CityError = "שדה העיר אינו תקין";
             AddressError = "שדה הכתובת אינו תקין";
             kinds = (new BeeKeeperKinds()).Kinds;
-            BeekeeperKind = Kinds[0];
+            Kind = Kinds[0];
             //RefreshCommand = new Command(Refresh);
             //ValidateManicurist();
 
@@ -415,14 +423,14 @@ namespace BeezyApp.ViewModels
             }
         }
 
-        private string beekeeperKind;
-        public string BeekeeperKind
+        private string kind;
+        public string Kind
         {
-            get => beekeeperKind;
+            get => kind;
             set
             {
-                beekeeperKind = value;
-                OnPropertyChanged("BeekeeperKind");
+                kind = value;
+                OnPropertyChanged("Kind");
             }
         }
 
@@ -437,8 +445,6 @@ namespace BeezyApp.ViewModels
             }
         }
         #endregion
-
-
 
 
         #region Photo
@@ -539,6 +545,8 @@ namespace BeezyApp.ViewModels
         }
         #endregion
 
+        
+
         public Command EditCommand { get; }
 
         public void OnEdit()
@@ -558,70 +566,106 @@ namespace BeezyApp.ViewModels
             ValidatePhoneNumber();
             ValidateCity();
             ValidateAddress();
-            //ValidateManicurist();
 
 
             if (!showNameError && !showPasswordError && !ShowEmailError && !ShowPhoneNumberError && !ShowCityError && !ShowAddressError)
             {
-                //Update AppUser object with the data from the Edit form
-                User theUser = ((App)App.Current).LoggedInUser;
-                theUser.UserName = Name;
-                theUser.UserPassword = Password;
-                theUser.UserEmail = Email;
-                theUser.UserPhone = PhoneNumber;
-                theUser.UserCity = Address;
-                theUser.UserAddress = address;
-
-                //Call the Register method on the proxy to register the new user
-                InServerCall = true;
-                bool success = await proxy.UpdateUser(theUser);
-
-                Change = false;
-                //If the save was successful, navigate to the login page
-                if (success)
+                if(IsBeekeeper)
                 {
-                    //Upload profile imae if needed
-                    if (!string.IsNullOrEmpty(LocalPhotoPath))
-                    {
-                        User? updatedUser = await proxy.UploadProfileImage(LocalPhotoPath);
-                        if (updatedUser == null)
-                        {
-                            await Shell.Current.DisplayAlert("Save Profile", "User Data Was Saved BUT Profile image upload failed", "ok");
-                        }
-                        else
-                        {
-                            theUser.ProfileImagePath = updatedUser.ProfileImagePath;
-                            UpdatePhotoURL(theUser.ProfileImagePath);
-                        }
+                    //Update AppUser object with the data from the Edit form
+                    BeeKeeper theUser = ((App)App.Current).LoggedInUserBeekeeper;
+                    theUser.UserName = Name;
+                    theUser.UserPassword = Password;
+                    theUser.UserEmail = Email;
+                    theUser.UserPhone = PhoneNumber;
+                    theUser.UserCity = Address;
+                    theUser.UserAddress = address;
+                    theUser.BeekeeperKind = Kind;
+                    theUser.BeekeeperRadius = Radius;
 
+
+                    //Call the Register method on the proxy to register the new user
+                    InServerCall = true;
+                    bool success = await proxy.UpdateUser(theUser);
+
+                    Change = false;
+                    //If the save was successful, navigate to the login page
+                    if (success)
+                    {
+                        //Upload profile imae if needed
+                        if (!string.IsNullOrEmpty(LocalPhotoPath))
+                        {
+                            User? updatedUser = await proxy.UploadProfileImage(LocalPhotoPath);
+                            if (updatedUser == null)
+                            {
+                                await Shell.Current.DisplayAlert("Save Profile", "User Data Was Saved BUT Profile image upload failed", "ok");
+                            }
+                            else
+                            {
+                                theUser.ProfileImagePath = updatedUser.ProfileImagePath;
+                                UpdatePhotoURL(theUser.ProfileImagePath);
+                            }
+
+                        }
+                        InServerCall = false;
+                        await Shell.Current.DisplayAlert("Save Profile", "Profile saved successfully", "ok");
                     }
-                    InServerCall = false;
-                    await Shell.Current.DisplayAlert("Save Profile", "Profile saved successfully", "ok");
+                    else
+                    {
+                        InServerCall = false;
+                        //If the registration failed, display an error message
+                        string errorMsg = "Save Profile failed. Please try again.";
+                        await Shell.Current.DisplayAlert("Save Profile", errorMsg, "ok");
+                    }
                 }
                 else
                 {
-                    InServerCall = false;
-                    //If the registration failed, display an error message
-                    string errorMsg = "Save Profile failed. Please try again.";
-                    await Shell.Current.DisplayAlert("Save Profile", errorMsg, "ok");
+                    //Update AppUser object with the data from the Edit form
+                    User theUser = ((App)App.Current).LoggedInUser;
+                    theUser.UserName = Name;
+                    theUser.UserPassword = Password;
+                    theUser.UserEmail = Email;
+                    theUser.UserPhone = PhoneNumber;
+                    theUser.UserCity = Address;
+                    theUser.UserAddress = address;
+
+                    //Call the Register method on the proxy to register the new user
+                    InServerCall = true;
+                    bool success = await proxy.UpdateUser(theUser);
+
+                    Change = false;
+                    //If the save was successful, navigate to the login page
+                    if (success)
+                    {
+                        //Upload profile imae if needed
+                        if (!string.IsNullOrEmpty(LocalPhotoPath))
+                        {
+                            User? updatedUser = await proxy.UploadProfileImage(LocalPhotoPath);
+                            if (updatedUser == null)
+                            {
+                                await Shell.Current.DisplayAlert("Save Profile", "User Data Was Saved BUT Profile image upload failed", "ok");
+                            }
+                            else
+                            {
+                                theUser.ProfileImagePath = updatedUser.ProfileImagePath;
+                                UpdatePhotoURL(theUser.ProfileImagePath);
+                            }
+
+                        }
+                        InServerCall = false;
+                        await Shell.Current.DisplayAlert("Save Profile", "Profile saved successfully", "ok");
+                    }
+                    else
+                    {
+                        InServerCall = false;
+                        //If the registration failed, display an error message
+                        string errorMsg = "Save Profile failed. Please try again.";
+                        await Shell.Current.DisplayAlert("Save Profile", errorMsg, "ok");
+                    }
                 }
             }
         }
 
-        public ICommand TreatmentsCommand { get; }
-        public async void OnTreatments()
-        {
-            await Shell.Current.GoToAsync("TreatmentsView");
-
-        }
-
-        public ICommand FavoritesCommand { get; }
-
-        public async void OnFavorites()
-        {
-            await Shell.Current.GoToAsync("FavoritesView");
-        }
-        //Define a method that will be called upon pressing the cancel button
         public void OnCancel()
         {
             //Navigate back to the login page
